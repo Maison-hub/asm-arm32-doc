@@ -1,0 +1,100 @@
+---
+title: LDR (Psuedo-Instruction)
+description: Charger une valeur depuis la mémoire dans un registre.
+---
+
+import { Code } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+
+
+## Syntax
+<div class="cmd-syntax">
+    <Code lang="asm" frame="terminal" code="LDR{S}{cond} dest, =expression" />
+</div>
+
+<Aside type="caution" title="Attention">
+Il ne faut pas confondre cette pseudo-instruction avec l'instruction [LDR](../ldr) standard qui charge une valeur depuis une adresse mémoire spécifiée.
+</Aside>
+
+L'instruction **LDR** est une pseudo-instruction utilisée pour charger une valeur depuis la mémoire dans un registre. L'utilisation de `=expression` permet de charger une valeur immédiate ou l'adresse d'une variable.
+
+## Ce que fait vraiment LDR
+`LDR =` n’est pas une vraie instruction **CPU**.
+C’est un raccourci que l’assembleur transforme.
+
+<Steps>
+
+1. **Ce que l'on ecrit** :
+
+    ```asm
+        LDR r0, =0x12345678
+    ```
+
+2. **Ce que l'assembleur fait** :
+
+    ```asm
+        LDR r0, [PC, #offset]
+
+        ... plus loin en mémoire ...
+
+        .word 0x12345678
+    ```
+
+</Steps>
+
+
+## LDR vs MOV
+
+La **pseudo-instruction LDR** avec `=expression` est souvent utilisée lorsque la valeur à charger est **trop grande** pour être représentée par une instruction MOV standard. En effet, MOV ne peut charger que des valeurs immédiates limitées, tandis que LDR peut accéder à des valeurs plus grandes en les **stockant d'abord en mémoire**.
+
+<Code lang="asm" frame="terminal" del="MOV R0, #0x12345678" ins="LDR R0, =0x12345678" code="
+MOV R0, #0x12345678  ; Erreur : valeur trop grande pour MOV
+LDR R0, =0x12345678  ; Correct : charge la valeur depuis la mémoire
+"/>
+
+## Example
+```asm
+LDR R2, =0x12345678  ; Charge la valeur 0x12345678 dans R2
+```
+
+```d2
+direction: right
+
+classes: {
+  invisible: {
+    style.opacity: 0
+    label: a
+  }
+}
+grid-columns: 2
+grid-gap: 250
+
+memoire: "" {
+    grid-columns: 1
+    grid-gap: 0
+    0x12345678: "0x12345678"
+}
+memoire.style.fill: transparent
+memoire.style.stroke: transparent
+memoire.0x12345678.style.stroke-dash: 5
+
+registres: "Registres"{
+    grid-columns: 1
+    grid-gap: 0
+	R0: "R0"
+	R1: "R1"
+	R2: "R2"
+	R3: "R3"
+	R4: "R4"
+    other: "..."
+}
+
+registres.style.fill: transparent
+registres.style.stroke: transparent
+
+memoire.0x12345678 -> registres.R2: "Met la valeur 0x12345678 dans R2"{
+    style.animated: true
+}
+
+```

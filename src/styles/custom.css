@@ -1,0 +1,8 @@
+.cmd-syntax{
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.cmd-syntax span{
+    font-weight: 600;
+}

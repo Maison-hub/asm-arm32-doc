@@ -1,0 +1,26 @@
+---
+title: CMP
+description: Comparer deux valeurs en soustrayant et en mettant à jour les drapeaux sans stocker le résultat.
+---
+
+
+import { Code } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+
+## Syntax
+<div class="cmd-syntax">
+    <Code lang="asm" frame="terminal" code="CMP{cond} src1, src2" />
+</div>
+
+L'instruction **CMP** est utilisée pour comparer deux valeurs en soustrayant et en mettant à jour les drapeaux sans stocker le résultat.
+
+```asm
+CMP R0, R1  ; Compare R0 et R1 en soustrayant R1 de R0, met à jour les drapeaux
+``` 
+## Example
+```asm
+CMP R1, R2  ; Compare R1 et R2 en soustrayant R2 de R1, met à jour les drapeaux
+```
+
+<Card title="Compare R1 and R2"/>

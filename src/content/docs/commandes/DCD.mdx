@@ -1,0 +1,67 @@
+---
+title: DCD
+description: Définir des constantes de données dans la mémoire.
+---
+
+import { Code } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import { Icon } from '@astrojs/starlight/components';
+import { Badge } from '@astrojs/starlight/components';
+
+## Syntax
+
+<div class="cmd-syntax">
+    <Code lang="asm" frame="terminal" code="name DCD value_1, value_2, ... value_N " />
+</div>
+
+
+L'instruction **DCD** pour **Define Constant Data** est utilisée pour définir des constantes de données dans la mémoire. Elle permet de réserver de l'espace mémoire et d'initialiser cet espace avec des valeurs spécifiques.
+
+## Example
+
+```asm
+var   DCD 0x12345678 
+tab   DCD 1, 2, 3, 4
+```
+
+## Que fait DCD concrètement ?
+
+```asm
+var   DCD 0x12345678
+```
+L'assembleur:
+- réserve 4 octets
+- écrit `0x12345678` en mémoire
+- associe l’adresse à var
+**-> `var` devient une adresse mémoire**
+
+## Accéder à une valeur définie par DCD
+
+```asm
+var DCD 0x12345678
+
+    LDR r0, =var   ; r0 = adresse de var
+    LDR r1, [r0]   ; r1 = 0x12345678
+```
+**Toujours en deux étapes :**
+1. récupérer l’adresse
+2. lire la mémoire
+
+## DCD et tableaux
+
+```asm
+TABLE DCD 10, 20, 30, 40
+```
+**Mémoire**
+```asm
+TABLE+0   10
+TABLE+4   20
+TABLE+8   30
+TABLE+12  40
+```
+
+**Accès**
+```asm
+LDR r0, =TABLE
+LDR r1, [r0, #4]   ; r1 = 20
+```

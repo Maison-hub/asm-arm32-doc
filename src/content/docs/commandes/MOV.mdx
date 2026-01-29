@@ -1,0 +1,65 @@
+---
+title: MOV
+description: A guide in my new Starlight docs site.
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+
+## Syntax
+<div class="cmd-syntax">
+    <Code lang="asm" frame="terminal" code="MOV{S}{cond} dest, op1 {, SHIFT_op #expression}" />
+</div>
+
+---
+
+
+MOV qui signifie "move" (déplacer) est une instruction utilisée pour copier une valeur d'une source (op1) vers une destination (dest). L'instruction peut également inclure un décalage (SHIFT_op) appliqué à l'opérande source avant la copie.
+```asm
+MOV R0, R1          ; Copie la valeur de R1 dans R0
+MOV R2, #10         ; Charge la valeur immédiate 10 dans R2
+MOV R3, R4, LSL #2  ;Copie la valeur de R4 dans R3 après l'avoir décalée à gauche de 2 bits
+``` 
+
+## Example
+```asm
+MOV R2, #10; Charge la valeur immédiate 10 dans R2
+``` 
+
+```d2
+classes: {
+  invisible: {
+    style.opacity: 0
+    label: a
+  }
+}
+grid-columns: 2
+grid-gap: 250
+
+values: "" {
+    grid-columns: 1
+    grid-gap: 0
+    pad1.class: invisible
+    pad2.class: invisible
+    n10: "#10"
+}
+values.style.fill: transparent
+values.style.stroke: transparent
+values.n10.style.stroke-dash: 5
+
+registres: ""{
+    grid-columns: 1
+    grid-gap: 0
+	R0: "R0"
+	R1: "R1"
+	R2: "R2"
+	R3: "R3"
+	R4: "R4"
+}
+
+values.n10 -> registres.R2: "Met la valeur 10 dans R2"{
+      style.animated: true
+}
+```
+
+

@@ -1,0 +1,74 @@
+---
+title: LDR
+description: Charger une valeur depuis la mémoire dans un registre.
+---
+
+import { Code } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import { Icon } from '@astrojs/starlight/components';
+import { Badge } from '@astrojs/starlight/components';
+
+## Syntax
+<Badge text="LDR lit la mémoire" variant="note" />
+
+<div class="cmd-syntax">
+    <Code lang="asm" frame="terminal" code="LDR{S}{cond} dest, [base {, OFFSET}] " />
+</div>
+
+
+L'instruction **LDR** est utilisée pour charger une valeur depuis une adresse mémoire spécifiée dans un registre. L'adresse mémoire est calculée en utilisant un registre de base (base) et un décalage optionnel (OFFSET).
+
+<Aside type="caution" title="Attention">
+Il ne faut pas confondre cette instruction avec la pseudo-instruction [LDR (Psuedo-Instruction)](../ldr-pseudo) qui permet de charger une valeur immédiate ou l'adresse d'une variable.
+</Aside>
+
+
+```asm
+LDR R0, [R1]      ; Charge la valeur à l'adresse contenue dans R1 dans R0
+LDR R2, [R3, #4]  ; Charge la valeur à l'adresse (R3 + 4) dans R2
+```
+
+## Example
+```asm
+LDR R4, [R5, #8]  ; Charge la valeur à l'adresse (R5 + 8) dans R4
+```
+
+```d2
+classes: {
+  invisible: {
+    style.opacity: 0
+    label: a
+  }
+}
+grid-columns: 2
+grid-gap: 250
+values: "" {
+    grid-columns: 1
+    grid-gap: 0
+    pad1.class: invisible
+    pad2.class: invisible
+    n8: "#8"
+}
+values.style.fill: transparent
+values.style.stroke: transparent
+values.n8.style.stroke-dash: 5
+registres: ""{
+    grid-columns: 1
+    grid-gap: 0
+    R4: "R4"
+    R5: "R5"
+}
+values.n8 -> registres.R5: "Utilisé pour calculer l'adresse mémoire"{
+      style.animated: true
+}
+```
+
+## Shift
+
+Le shift ou décalage ou offset est une valeur optionnelle qui peut être ajoutée à l'adresse de base pour calculer l'adresse mémoire finale à partir de laquelle la valeur sera chargée. Le décalage peut être une valeur immédiate (comme #4) ou un registre contenant la valeur de décalage.
+
+### Exemple de shift
+```asm
+LDR R4, [R5, #8]  ; Charge la valeur à l'adresse (R5 + 8) dans R4
+LDR R6, [R7, R8] ; Charge la valeur à l'adresse (R7 + valeur dans R8) dans R6
+```

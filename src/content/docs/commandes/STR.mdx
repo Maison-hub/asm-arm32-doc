@@ -1,0 +1,92 @@
+---
+title: STR
+description: Stocker une valeur dans un registre ou en mémoire.
+---
+
+import { Code } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+import { Icon } from '@astrojs/starlight/components';
+import { Badge } from '@astrojs/starlight/components';
+
+## Syntax
+
+<div class="cmd-syntax">
+    <Code lang="asm" frame="terminal" code="STR{B}{cond} source, [dest {, OFFSET}] ; Offset addressing
+STR{B}{cond} source, [dest, OFFSET]! ; Pre-indexed addressing
+STR{B}{cond} source, [dest], OFFSET ; Post-indexed addressing" />
+</div>
+
+L'instruction **STR** pour **Store Register** permet de **stocker** la valeur d'un registre source dans une adresse mémoire c'est le contraire de l'instruction [LDR](../ldr). 
+L'adresse mémoire est calculée en utilisant un registre de destination (dest) et un décalage optionnel (OFFSET).
+
+## Example
+
+```asm
+STR r0, [r1]
+```
+- **écrit** le contenu de `r0` à **l’adresse** contenue dans `r1`.
+
+## Différents cas d'utilisation de STR
+
+### Cas 1 : écriture simple
+
+```asm
+STR r2, [r1]
+```
+- **écrit** le contenu de `r2` à l’adresse contenue dans `r1`.
+
+### Cas 2 : avec offset immédiat
+
+```asm
+STR r2, [r1, #8]
+```
+- **écrit**  à l’adresse `r1 + 8`
+
+### Cas 3 : offset dans un registre
+
+```asm
+STR r2, [r1, r3]
+```
+- **écrit**  à l’adresse `r1 + r3`
+
+### Cas 4 : Cas 4 : offset décalé (tableaux)
+
+```asm
+STR r2, [r1, r3, LSL #2]
+```
+- **écrit**  à l’adresse `r1 + (r3 × 4)`
+
+| Eléments    | Rôle        |
+| ----------- | ----------- |
+| `r2`          |  Source     |
+| `r1`          | Address base |
+| `r3`          | Offset (décalage)    |
+
+**LSL #2** \<=> **Multiplier par 4** (décalage logique à gauche de 2 bits)
+
+adresse = r1 + (r3 × 4)
+
+## STR avec mise à jour de l’adresse
+
+### Post-indexé
+
+```asm
+STR r2, [r1], #4
+```
+1. écrit la valeur
+2. met à jour r1 avec r1 + 4
+
+### Pré-indexé
+
+```asm
+STR r2, [r1, #4]!
+```
+1. met à jour r1 avec r1 + 4
+2. puis écriture
+
+## Variantes par taille
+| Instruction | Taille  |
+| ----------- | ------- |
+| `STR`       | 32 bits |
+| `STRH`      | 16 bits |
+| `STRB`      | 8 bits  |

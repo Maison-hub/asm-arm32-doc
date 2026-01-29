@@ -1,0 +1,28 @@
+---
+title: ADD
+description: Additionner deux valeurs et stocker le résultat dans un registre.
+---
+
+
+import { Code } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+
+## Syntax
+<div class="cmd-syntax">
+    <Code lang="asm" frame="terminal" code="ADD{cond} dest, src1, src2" />
+</div>
+
+L'instruction **ADD** est utilisée pour additionner deux valeurs et stocker le résultat dans un registre.
+
+```asm
+ADD R0, R1, R2  ; Additionne R1 et R2, stocke le résultat dans R0
+``` 
+## Example
+```asm
+ADD R1, R2, R3  ; Additionne R2 et R3, stocke le résultat dans R1
+```
+
+<Card title="R1 = R2 + R3"/>
+
+
