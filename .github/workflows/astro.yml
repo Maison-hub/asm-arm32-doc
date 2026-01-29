@@ -63,6 +63,10 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+      - name: Install d2
+        run: |
+          curl -fsSL https://d2lang.com/install.sh | sh -s -- --dir /usr/local/bin
+          d2 --version
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
         working-directory: ${{ env.BUILD_PATH }}
