@@ -18,7 +18,11 @@ export default defineConfig({
 		customCss: [
 			'./src/styles/custom.css',
 		],
-        social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+        defaultLocale: 'fr',
+        social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/Maison-hub/asm-arm32-doc' }],
+        editLink: {
+            baseUrl: 'https://github.com/Maison-hub/asm-arm32-doc/edit/main/'
+        },
         sidebar: [
             {
                 label: 'Guides',
