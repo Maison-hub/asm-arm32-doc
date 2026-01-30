@@ -10,6 +10,8 @@ import d2 from 'astro-d2';
 
 // https://astro.build/config
 export default defineConfig({
+    site: 'https://maison-hub.github.io',
+    base: '/asm-arm32-doc/',
     integrations: [starlight({
         plugins: [
             // ion(),
