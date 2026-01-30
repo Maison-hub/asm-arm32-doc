@@ -8,7 +8,7 @@ hero:
     file: https://cdn-icons-png.flaticon.com/512/13321/13321936.png
   actions:
     - text: Explorer la doc
-      link: /guides/introduction
+      link: /asm-arm32-doc/guides/introduction
       icon: right-arrow
 ---
 
@@ -17,20 +17,21 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 ## Next steps
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+	<Card title="Introduction" icon="open-book">
+		Lire le guide d'introduction à l'assembleur ARM 32
+		[→ Aller au guide](/asm-arm32-doc/guides/introduction)
 	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
+	<Card title="Commandes" icon="forward-slash">
+		Découvrir les différentes commandes assembleur ARM 32
+		[→ Voir les commandes](/asm-arm32-doc/commandes/)
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="Basé sur VisUAL" icon="document">
+		Cette documentation est basée sur la documentation de l'outil VisUAL
+		[→ Voir le site de VisUAL](https://salmanarif.bitbucket.io/visual/supported_instructions.html)
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
+	<Card title="Contribuer" icon="github">
+		Contribuer à la documentation ou au code source
+		[→ Voir le dépôt GitHub](https://github.com/Maison-hub/asm-arm32-doc)
 	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
+
 </CardGrid>

@@ -16,7 +16,7 @@ export default defineConfig({
         plugins: [
             // ion(),
         ],
-        title: 'ARM 32 Friendly Docs',
+        title: 'ASM arm-32 Doc',
 		customCss: [
 			'./src/styles/custom.css',
 		],
