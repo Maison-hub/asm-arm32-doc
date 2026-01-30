@@ -65,7 +65,8 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install d2
         run: |
-          curl -fsSL https://d2lang.com/install.sh | sh -s -- --dir /usr/local/bin
+          curl -fsSL https://d2lang.com/install.sh | sh -s --
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
           d2 --version
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
