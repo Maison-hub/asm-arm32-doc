@@ -5,7 +5,7 @@ template: splash # Remove or comment out this line to display the site sidebar o
 hero:
   tagline: Vous avez bien fait de venir ici 😉
   image:
-    file: https://cdn-icons-png.flaticon.com/512/13321/13321936.png
+    file: ../../assets/asm.png
   actions:
     - text: Explorer la doc
       link: /asm-arm32-doc/guides/introduction
@@ -13,8 +13,11 @@ hero:
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
+import HeroBg from '../../components/HeroBg.astro';
 
 ## Next steps
+
+<HeroBg />
 
 <CardGrid stagger>
 	<Card title="Introduction" icon="open-book">
